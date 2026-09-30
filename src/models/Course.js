@@ -18,10 +18,10 @@ class Course {
                 'INSERT INTO courses (code, description, intensity, weight, active) VALUES (?, ?, ?, ?, 1)',
                 [code, description, intensity, weight]
             );
-            console.log(`\n✅ ¡Curso guardado con éxito! (ID: ${result.insertId})`);
+            console.log(`\n ¡Curso guardado con éxito! (ID: ${result.insertId})`);
             return result.insertId;
         } catch (error) {
-            console.error('\n❌ Error al crear el curso:', error.message);
+            console.error('\n Error al crear el curso:', error.message);
         }
     }
 
@@ -31,10 +31,11 @@ class Course {
             const [rows] = await pool.query('SELECT * FROM courses');
             return rows;
         } catch (error) {
-            console.error('\n❌ Error al obtener los cursos:', error.message);
+            console.error('\n Error al obtener los cursos:', error.message);
             return [];
         }
     }
 }
 
 module.exports = Course;
+
