@@ -8,7 +8,7 @@ const rl = readline.createInterface({
 });
 
 function mostrarMenuPrincipal() {
-    console.log('\n--- 🏫 MENÚ PRINCIPAL ESCUELA ACME --- ¿Qué deseas hacer?');
+    console.log('\n---  MENÚ PRINCIPAL ESCUELA ACME --- ¿Qué deseas hacer?');
     console.log('1. Gestionar Estudiantes (Registro paso a paso)');
     console.log('2. Gestionar Profesores (Registro paso a paso)');
     console.log('3. Ver Cursos Disponibles');
@@ -31,7 +31,7 @@ function mostrarMenuPrincipal() {
                 process.exit(0);
                 break;
             default:
-                console.log('\n❌ Opción no válida, intenta de nuevo.');
+                console.log('\n Opción no válida, intenta de nuevo.');
                 mostrarMenuPrincipal();
                 break;
         }
@@ -40,7 +40,7 @@ function mostrarMenuPrincipal() {
 
 // --- REGISTRO DE ESTUDIANTES PASO A PASO ---
 function registrarEstudiante() {
-    console.log('\n--- 📝 REGISTRO DE NUEVO ESTUDIANTE ---');
+    console.log('\n---  REGISTRO DE NUEVO ESTUDIANTE ---');
     
     rl.question('Escribe tu código de estudiante: ', (codigo) => {
         rl.question('Escribe tu nombre: ', (firstName) => {
@@ -62,9 +62,9 @@ function registrarEstudiante() {
                                                     codigo, firstName, apellido, identificationTypeId, 
                                                     identificationNumber, genero, birthDate, email, address, cityId
                                                 ]);
-                                                console.log('\n✅ ¡Estudiante registrado con éxito en la base de datos!');
+                                                console.log('\n ¡Estudiante registrado con éxito en la base de datos!');
                                             } catch (err) {
-                                                console.log('\n❌ Error al registrar estudiante:', err.message);
+                                                console.log('\n Error al registrar estudiante:', err.message);
                                             }
                                             mostrarMenuPrincipal();
                                         });
@@ -95,9 +95,9 @@ function registrarProfesor() {
                                 VALUES (?, ?, ?, ?, ?)
                             `;
                             await pool.query(query, [firstName, apellido, identificationTypeId, identificationNumber, email]);
-                            console.log('\n✅ ¡Profesor registrado con éxito!');
+                            console.log('\n ¡Profesor registrado con éxito!');
                         } catch (err) {
-                            console.log('\n❌ Error al registrar profesor:', err.message);
+                            console.log('\n Error al registrar profesor:', err.message);
                         }
                         mostrarMenuPrincipal();
                     });
@@ -111,14 +111,14 @@ function registrarProfesor() {
 async function verCursos() {
     try {
         const [rows] = await pool.query('SELECT * FROM Cursos');
-        console.log('\n📚 --- LISTA DE CURSOS DISPONIBLES ---');
+        console.log('\n --- LISTA DE CURSOS DISPONIBLES ---');
         if (rows.length === 0) {
             console.log('(No hay cursos registrados todavía)');
         } else {
             console.table(rows);
         }
     } catch (error) {
-        console.error('\n❌ Error al consultar cursos:', error.message);
+        console.error('\n Error al consultar cursos:', error.message);
     }
     mostrarMenuPrincipal();
 }
